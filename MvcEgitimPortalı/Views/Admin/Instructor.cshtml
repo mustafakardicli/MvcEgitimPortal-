@@ -1,0 +1,391 @@
+﻿
+@{
+    ViewData["Title"] = "Instructor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Simple Tables</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a asp-action="Index" class="brand-link">
+      <img src="~/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/Photos/pp.png" style="width:30px"/> @User.Identity.Name
+        </div>
+
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="AdminUser" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Kullanıcılar
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="GetRoleList" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Roller
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="Instructor" class="nav-link">
+                                <i class="nav-icon fas fa-address-book"></i>
+                                <p>
+                                    Eğitmenler
+
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="Lesson" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Dersler
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="Subject" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Konular
+
+                                </p>
+                            </a>
+                        </li>
+
+
+                        
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Eğitmenler</h1>
+            <br>
+
+          </div>
+
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+
+   <div class="row">
+    <div class="col-md-8">
+        <div id="progress">
+        <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tbInstructor">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Adı Soyadı</th>
+                    <th>Email</th>
+                    <th>Ders</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+
+        </table>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow mb-4">
+                <div class="card-body">
+        <h3 id="baslik"></h3><hr />
+
+        <div class="mb-3">
+            <label>Adı Soyadı</label>
+            <input type="text" class="form-control" id="txtName" />
+        </div>
+        <div class="mb-3">
+            <label>E-Posta</label>
+            <input type="text" class="form-control" id="txtEmail" />
+        </div>
+        <div class="mb-3">
+            <label>Ders Adı</label>
+            <select class="form-control" id="ddlLesson">
+                <!-- Kategorileri buradan yükleyebilirsiniz -->
+            </select>
+        </div>
+
+
+        <div class="mb-3">
+            <input type="hidden" id="txtId" />
+            <button class="btn btn-primary" id="btnKaydet">Kaydet</button>
+            <button class="btn btn-secondary" id="btnVazgec">Vazgeç</button>
+            <button class="btn btn-danger" id="btnSil">Sil</button>
+        </div>
+        <div class="alert" id="sonuc"></div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+            
+
+
+
+
+
+
+
+
+
+
+
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/AdminLTE/dist/js/demo.js"></script>
+</body>
+</html>
+
+
+@section Scripts {
+        <script>
+            $(document).ready(function () {
+                $("#baslik").html("Kayıt Ekle");
+                LoadInstructors();
+                LoadLessons();
+
+                $("#btnKaydet").click(function () {
+                    var fullName = $("#txtName").val();
+                    var lessonId = $("#ddlLesson").val();
+                    var email = $("#txtEmail").val();
+                    var id = $("#txtId").val();
+
+                    if (fullName == "" || fullName == null) {
+                        $("#sonuc")
+                            .removeClass()
+                            .addClass("alert alert-danger")
+                            .html("Eğitmen Adı Soyadı Giriniz!");
+                        return false;
+                    }
+
+                    $.ajax({
+                        url: "/Admin/InstructorAddEditAjax",
+                        type: "POST",
+                        data: { id: id, fullName: fullName, lessonId: lessonId, email: email },
+                        success: function (data) {
+                            if (data.status) {
+                                $("#sonuc")
+                                    .removeClass()
+                                    .addClass("alert alert-success")
+                                    .html(data.message);
+                                LoadInstructors();
+                                // Düzenleme Formunu Sıfırla
+                                $("#txtName").val("");
+                                $("#ddlLesson").val("");
+                                $("#txtEmail").val("");
+                                $("#txtId").val("");
+                                $("#btnVazgec").hide();
+                                $("#btnSil").hide();
+                                $("#baslik").html("Kayıt Ekle");
+                            } else {
+                                $("#sonuc")
+                                    .removeClass()
+                                    .addClass("alert alert-danger")
+                                    .html(data.message);
+                            }
+                        },
+                        error: function (e) { }
+                    });
+                });
+
+                $(document).on("click", ".edit", function () {
+                    var id = $(this).closest("tr").attr("id");
+                    $("#baslik").html("Kayıt Düzenle");
+                    $("#btnVazgec").show();
+                    $("#btnSil").show();
+                    $.ajax({
+                        url: "/Admin/InstructorByIdAjax",
+                        type: "Get",
+                        data: { id: id },
+                        success: function (data) {
+                            $("#txtName").val(data.fullName);
+                            $("#ddlLesson").val(data.lessonId);
+                            $("#txtEmail").val(data.email);
+                            $("#txtId").val(data.id);
+                        },
+                        error: function () { }
+                    });
+                });
+
+                $("#btnVazgec").click(function () {
+                    $("#txtName").val("");
+                    $("#ddlLesson").val("");
+                    $("#txtEmail").val("");
+                    $("#txtId").val("");
+                    $("#btnVazgec").hide();
+                    $("#btnSil").hide();
+                    $("#baslik").html("Kayıt Ekle");
+                });
+
+                $("#btnSil").click(function () {
+                    var id = $("#txtId").val();
+                    $.ajax({
+                        url: "/Admin/InstructorRemoveAjax",
+                        type: "Get",
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.status) {
+                                $("#sonuc")
+                                    .removeClass()
+                                    .addClass("alert alert-success")
+                                    .html(data.message);
+                                LoadInstructors();
+                                $("#txtName").val("");
+                                $("#ddlLesson").val("");
+                                $("#txtEmail").val("");
+                                $("#txtId").val("");
+                                $("#btnVazgec").hide();
+                                $("#btnSil").hide();
+                                $("#baslik").html("Kayıt Ekle");
+                            } else {
+                                $("#sonuc")
+                                    .removeClass()
+                                    .addClass("alert alert-danger")
+                                    .html(data.message);
+                            }
+                        },
+                        error: function () { }
+                    });
+                });
+
+                function LoadInstructors() {
+                    $.ajax({
+                        url: "/Admin/InstructorListAjax",
+                        type: "Get",
+                        success: function (data) {
+                            var rows = "";
+                            $.each(data, function (index, item) {
+                                rows += "<tr id='" + item.id + "'>";
+                                rows += "<td>" + item.id + "</td>";
+                                rows += "<td>" + item.fullName + "</td>";
+                                rows += "<td>" + item.email + "</td>";
+                                rows += "<td>" + item.lessonId + "</td>";
+                                rows += "<td><a href='javascript:void(0);' class='btn btn-primary edit'>Düzenle</a></td>";
+                                rows += "</tr>";
+                            });
+                            $("#tbInstructor tbody").html(rows);
+                        },
+                        error: function () { }
+                    });
+                }
+
+                function LoadLessons() {
+                    $.ajax({
+                        url: "/Admin/LessonListAjax",
+                        type: "Get",
+                        success: function (data) {
+                            var options = "<option value=''>Ders Seçiniz</option>";
+                            $.each(data, function (index, item) {
+                                options += "<option value='" + item.lessonId + "'>" + item.lessonName + "</option>";
+                            });
+                            $("#ddlLesson").html(options);
+                        },
+                        error: function () { }
+                    });
+                }
+            });
+        </script>
+}

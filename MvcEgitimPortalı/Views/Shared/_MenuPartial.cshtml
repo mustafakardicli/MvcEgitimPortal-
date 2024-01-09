@@ -1,0 +1,37 @@
+﻿@inject MvcEgitimPortalı.Models.AppDbContext _context
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+             <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GetUserList">Kullanıcılar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GetRoleList">Roller</a>
+            </li>
+        }
+    }
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Instructor">Eğitmenler</a>
+    </li>
+    <div class="dropdown">
+        <a class="btn btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Dersler
+        </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            @foreach (var ders in _context.Lessons.ToList())
+            {
+                        <a class="dropdown-item" asp-controller="Lesson" asp-action="@ders.LessonName">@ders.LessonName</a>
+            }
+            </ul>
+    </div>
+
+</ul>

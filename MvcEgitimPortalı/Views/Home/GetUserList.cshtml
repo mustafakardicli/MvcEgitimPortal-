@@ -1,0 +1,46 @@
+﻿
+@inject MvcEgitimPortalı.Models.AppDbContext _context
+@{
+    ViewData["Title"] = "GetUserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kullanıcı Listesi</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+    <div id="progress">
+        <div class="table-responsive">
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Adı Soyadı</th>
+            <th>Kullanıcı Adı</th>
+            <th>E-Posta</th>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in _context.Users.ToList())
+        {
+                                  <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.FullName</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.Email</td>
+                                        
+
+                                </tr>  
+        }
+
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+

@@ -1,0 +1,143 @@
+﻿@inject MvcEgitimPortalı.Models.AppDbContext _context
+@{
+    ViewData["Title"] = "Türkçe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Matematik</h1>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <div class="header">
+              <span data-feather="home"></span>
+              Eğitmen
+            </div>
+          </li>
+          <li class="nav-item">
+
+                        @foreach (var instructor in _context.Instructors.Where(instructor => instructor.LessonId == 1))
+                        {
+                                                        <div class="nav-link active" href="#">
+                                                        <span data-feather="home"></span>
+                                @instructor.FullName
+                                                        </div>
+                        }
+
+
+          </li>
+
+
+          <li class="nav-item">
+            <div class="header">
+              <span data-feather="home"></span>
+              Konular
+            </div>
+          </li>
+          <li class="nav-item">
+
+
+
+
+                        @foreach (var subject in _context.Subjects.Where(subject => subject.LessonId == 1))
+                        {
+                                                    <a class="nav-link active" href="#">
+                                                    <span data-feather="home"></span>
+                                @subject.SubjectName
+                                                    </a>
+                        }
+
+
+          </li>
+
+
+          <!-- Diğer menü öğeleri -->
+        </ul>
+      </div>
+    </nav>
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- Sayfa içeriği buraya gelecek -->
+
+
+
+
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rpvjD1Pu3q8?si=N_K9j0M1SK0Dz1sa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="mt-3">
+                <h4>Üslü Sayılar 1</h4>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/YH6gBbgmEBc?si=Mjx36HuUBXnDKW_h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="mt-3">
+                <h4>Üslü Sayılar 2</h4>
+            </div>
+        </div>
+
+        <!-- 3. YouTube Video Kutusu -->
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <!-- YouTube video embed kodu buraya gelecek -->
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/su243dDja9c?si=11jkpiY7FiBS5FCr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="mt-3">
+                <h4>Mutlak Değer</h4>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/EELDU_srIMs?si=EdrGaLXEQMnlg2MG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="mt-3">
+                <h4>Köklü Sayılar</h4>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/BPThb2j0x9A?si=lLYkSq7Zw5XglxpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="mt-3">
+                <h4>Çarpanlara Ayırma</h4>
+            </div>
+        </div>
+
+        <!-- 3. YouTube Video Kutusu -->
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <!-- YouTube video embed kodu buraya gelecek -->
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/e4FKB-hnOms?si=9Y2m9Jtc41hKd9CW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="mt-3">
+                <h4>Kümeler</h4>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+                    <!-- Sayfa özelleştirmeleri için gerekli JavaScript dosyalarını buraya ekleyebilirsiniz -->
+}
+
+
+
